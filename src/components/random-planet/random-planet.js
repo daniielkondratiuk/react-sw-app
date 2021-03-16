@@ -15,6 +15,7 @@ const RandomPlanet = () => {
 				 .then(planet => setRandomPlanet(planet))
 				 .catch(() => setError(true))
 	}
+
 	useEffect(() => {
 		fetchPlanet()
 		const interval = setInterval(fetchPlanet, 5000)
@@ -24,11 +25,12 @@ const RandomPlanet = () => {
 	const content = randomPlanet ? <ViewPlanet randomPlanet={randomPlanet}/> : null
 	const spiner = !randomPlanet && !error ? <Loading/> : null
 	const err = error ? <h1 className='mx-auto'>Ooops</h1> : null
-	return (<div className="random-planet jumbotron rounded">
-		{content}
-		{spiner}
-		{err}
-	</div>)
+	return (
+		<div className="random-planet jumbotron rounded">
+			{content}
+			{spiner}
+			{err}
+		</div>)
 }
 
 const ViewPlanet = ({randomPlanet}) => {
@@ -36,7 +38,7 @@ const ViewPlanet = ({randomPlanet}) => {
 	return (
 		<>
 			<img className="planet-image"
-					 src={`https://starwars-visualguide.com/assets/img/planets/${id ? id : '5'}.jpg`} alt={name}/>
+					 src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={name}/>
 			<div>
 				<h4>{name}</h4>
 				<ul className="list-group list-group-flush">
