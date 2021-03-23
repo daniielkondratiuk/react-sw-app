@@ -3,7 +3,6 @@ import SwapiService from '../../services/SwapiService'
 import Loading from '../loading'
 
 import './random-planet.scss'
-
 const RandomPlanet = () => {
 	const [randomPlanet, setRandomPlanet] = useState(null)
 	const [error, setError] = useState(false)

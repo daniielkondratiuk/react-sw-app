@@ -1,29 +1,22 @@
 import React, {useState} from 'react'
-import ItemList from '../item-list'
-import PersonDetails from '../person-details'
+import Row from '../row'
+import {PersonDetails, PersonList} from '../sw-components'
+import ErrorBoundry from '../error-boundry'
 
 const PersonPage = () => {
-	const [selectedPerson, setSelectedPerson] = useState(null)
-	const onPersonSelected = (id) => setSelectedPerson(id)
-	const [isError, setIsError] = useState(false)
-
-	const onError = () => {
-		setIsError(true)
-	}
-
-	if (isError){
-		return <h1 className='text-center'>Ops, something wrong</h1>
-	}
+	const [selectedItem, setSelectedItem] = useState(null)
+	const onItemSelected = (id) => setSelectedItem(id)
 
 	return (
-		<div className="row mb2">
-			<div className="col-md-6">
-				<ItemList onPersonSelected={onPersonSelected} onError={onError}/>
-			</div>
-			<div className="col-md-6">
-				<PersonDetails personId={selectedPerson} onError={onError}/>
-			</div>
-		</div>)
+		<Row>
+			<ErrorBoundry>
+				<PersonList onItemSelected={onItemSelected}/>
+			</ErrorBoundry>
+			<ErrorBoundry>
+				<PersonDetails itemId={selectedItem}/>
+			</ErrorBoundry>
+		</Row>
+	)
 }
 
 export default PersonPage
