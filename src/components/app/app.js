@@ -3,6 +3,7 @@ import Header from '../header'
 import RandomPlanet from '../random-planet'
 import PersonPage from '../person-page'
 import PlanetPage from '../planet-page'
+import StarshipPage from '../starship-page'
 
 import './app.scss'
 
@@ -19,8 +20,9 @@ const App = () => {
 				Toggle Random Planet
 			</button>
 			{showRandomPlanet ? <RandomPlanet/> : null}
-			{/*<PersonPage/>*/}
+			<PersonPage/>
 			<PlanetPage/>
+			<StarshipPage/>
 		</div>)
 }
 

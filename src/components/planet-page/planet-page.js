@@ -1,29 +1,26 @@
 import React, {useState} from 'react'
 import Row from '../row'
 import {PlanetDetails, PlanetList} from '../sw-components'
+import ErrorBoundry from '../error-boundry'
+import {Record} from '../item-details'
 
 
 const PlanetPage = () => {
 	const [selectedItem, setSelectedItem] = useState(null)
-	const [isError, setIsError] = useState(false)
-
-
 	const onItemSelected = (id) => setSelectedItem(id)
-
-	const onError = () => {
-		setIsError(true)
-	}
-
-	if (isError){
-		return <h1 className='text-center'>Ops, something wrong</h1>
-	}
-
-
 
 	return (
 		<Row>
-			<PlanetList onItemSelected={onItemSelected} onError={onError}/>
-			<PlanetDetails itemId={selectedItem}/>
+			<ErrorBoundry>
+				<PlanetList onItemSelected={onItemSelected}/>
+			</ErrorBoundry>
+			<ErrorBoundry>
+				<PlanetDetails itemId={selectedItem}>
+					<Record field='population' label='Population :'/>
+					<Record field='diameter' label='Diameter :'/>
+					<Record field='rotationPeriod' label='Rotation Period :'/>
+				</PlanetDetails>
+			</ErrorBoundry>
 		</Row>
 	)
 }
