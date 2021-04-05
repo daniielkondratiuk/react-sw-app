@@ -20,7 +20,7 @@ const withDetailsData = (View,getData,getImageUrl) => (props) => {
 	}, [itemId,onError,getData])
 
 	if (!itemId) {
-		return <span>Select person from a list</span>
+		return <span>Select item from a list</span>
 	}
 
 	if (loading) {

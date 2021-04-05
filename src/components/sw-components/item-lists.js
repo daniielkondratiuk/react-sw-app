@@ -2,8 +2,10 @@ import React from 'react'
 import {withData} from '../../hoc-helpers'
 import ItemList from '../item-list'
 import SwapiService from '../../services/SwapiService'
+// import DummySwapiService from '../../services/DummySwapiService'
 
 const {getAllPeople, getAllPlanets, getAllStarships} = new SwapiService()
+// const {getAllPeople, getAllPlanets, getAllStarships} = new DummySwapiService()
 
 const withChildFunction = (Wrapper, renderFn) => (props) => {
 	return (

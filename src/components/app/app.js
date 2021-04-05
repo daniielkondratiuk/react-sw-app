@@ -1,29 +1,29 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Header from '../header'
 import RandomPlanet from '../random-planet'
-import PersonPage from '../person-page'
-import PlanetPage from '../planet-page'
-import StarshipPage from '../starship-page'
+import {PersonPage,PlanetPage,StarshipPage} from '../pages'
+import ErrorBoundry from '../error-boundry'
+import Context from '../swapi-service-context'
+import SwapiService from '../../services/SwapiService'
 
 import './app.scss'
 
 const App = () => {
-	const [showRandomPlanet, setShowRandomPlanet] = useState(true)
-
+	const onServiceChange = () => {
+		console.log('service change')
+	}
 	return (
-		<div className='container'>
-			<Header/>
-			<button
-				className="toggle-planet btn btn-light btn my-2"
-				onClick={() => setShowRandomPlanet(!showRandomPlanet)}
-			>
-				Toggle Random Planet
-			</button>
-			{showRandomPlanet ? <RandomPlanet/> : null}
-			<PersonPage/>
-			<PlanetPage/>
-			<StarshipPage/>
-		</div>)
+		<ErrorBoundry>
+			<Context.Provider value={new SwapiService()}>
+				<div className='container'>
+					<Header onServiceChange={onServiceChange}/>
+					<RandomPlanet updateInterval={25000}/>
+					<PersonPage/>
+					<PlanetPage/>
+					<StarshipPage/>
+				</div>
+			</Context.Provider>
+		</ErrorBoundry>)
 }
 
 export default App

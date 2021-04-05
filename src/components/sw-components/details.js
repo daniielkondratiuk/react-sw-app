@@ -1,8 +1,10 @@
 import ItemDetails from '../item-details'
-import SwapiService from '../../services/SwapiService'
 import {withDetailsData} from '../../hoc-helpers'
+import SwapiService from '../../services/SwapiService'
+// import DummySwapiService from '../../services/DummySwapiService'
 
 const {getPerson, getPlanet, getStarship, getPersonImage, getPlanetImage, getStarshipImage} = new SwapiService()
+// const {getPerson, getPlanet, getStarship, getPersonImage, getPlanetImage, getStarshipImage} = new DummySwapiService()
 
 const PersonDetails = withDetailsData(ItemDetails, getPerson, getPersonImage)
 const PlanetDetails = withDetailsData(ItemDetails, getPlanet, getPlanetImage)

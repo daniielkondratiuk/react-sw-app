@@ -1,8 +1,8 @@
 export default class SwapiService {
-	_apiBase = 'https://swapi.dev/api'
-	_imageBase = 'https://starwars-visualguide.com/assets/img'
+	#_apiBase = 'https://swapi.dev/api'
+	#_imageBase = 'https://starwars-visualguide.com/assets/img'
 	getResource = async (url) => {
-		const res = await fetch(this._apiBase + url)
+		const res = await fetch(this.#_apiBase + url)
 		if (!res.ok) {
 			throw new Error(`Could not fetch ${url} , received ${res.status}`)
 		}
@@ -40,13 +40,13 @@ export default class SwapiService {
 	}
 
 	getPersonImage = (id) => {
-		return `${this._imageBase}/characters/${id}.jpg`
+		return `${this.#_imageBase}/characters/${id}.jpg`
 	}
 	getPlanetImage = (id) => {
-		return `${this._imageBase}/planets/${id}.jpg`
+		return `${this.#_imageBase}/planets/${id}.jpg`
 	}
 	getStarshipImage = (id) => {
-		return `${this._imageBase}/starships/${id}.jpg`
+		return `${this.#_imageBase}/starships/${id}.jpg`
 	}
 
 	_extractId = (item) => {

@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import SwapiService from '../../services/SwapiService'
+import PropTypes from 'prop-types'
 import Loading from '../loading'
 
 import './random-planet.scss'
-const RandomPlanet = () => {
+
+const RandomPlanet = ({updateInterval}) => {
 	const [randomPlanet, setRandomPlanet] = useState(null)
 	const [error, setError] = useState(false)
-
 	function fetchPlanet() {
 		const swapi = new SwapiService()
 		const id = Math.ceil(Math.random() * 20)
@@ -17,9 +18,9 @@ const RandomPlanet = () => {
 
 	useEffect(() => {
 		fetchPlanet()
-		const interval = setInterval(fetchPlanet, 5000)
+		const interval = setInterval(fetchPlanet, updateInterval)
 		return () => clearInterval(interval)
-	}, [])
+	}, [updateInterval])
 
 	const content = randomPlanet ? <ViewPlanet randomPlanet={randomPlanet}/> : null
 	const spiner = !randomPlanet && !error ? <Loading/> : null
@@ -30,6 +31,14 @@ const RandomPlanet = () => {
 			{spiner}
 			{err}
 		</div>)
+
+}
+
+RandomPlanet.defaultProps = {
+	updateInterval : 25000
+}
+RandomPlanet.propTypes = {
+	updateInterval : PropTypes.number
 }
 
 const ViewPlanet = ({randomPlanet}) => {
