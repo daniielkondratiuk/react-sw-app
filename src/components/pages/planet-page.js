@@ -1,21 +1,21 @@
-import React, {useState} from 'react'
+import React from 'react'
+import {withRouter} from 'react-router-dom'
 import Row from '../row'
 import {PlanetDetails, PlanetList} from '../sw-components'
 import ErrorBoundry from '../error-boundry'
 import {Record} from '../item-details'
 
 
-const PlanetPage = () => {
-	const [selectedItem, setSelectedItem] = useState(null)
-	const onItemSelected = (id) => setSelectedItem(id)
-
+const PlanetPage = ({history, match}) => {
+	const {id} = match.params
 	return (
 		<Row>
 			<ErrorBoundry>
-				<PlanetList onItemSelected={onItemSelected}/>
+				{/*<PlanetList onItemSelected={(id)=>history.push(id)}/>*/}
+				<PlanetList onItemSelected={history.push}/>
 			</ErrorBoundry>
 			<ErrorBoundry>
-				<PlanetDetails itemId={selectedItem}>
+				<PlanetDetails itemId={id}>
 					<Record field='population' label='Population :'/>
 					<Record field='diameter' label='Diameter :'/>
 					<Record field='rotationPeriod' label='Rotation Period :'/>
@@ -25,4 +25,4 @@ const PlanetPage = () => {
 	)
 }
 
-export default PlanetPage
+export default withRouter(PlanetPage)

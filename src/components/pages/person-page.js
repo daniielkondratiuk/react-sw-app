@@ -1,28 +1,16 @@
-import React, {useState} from 'react'
-import Row from '../row'
-import {Record} from '../item-details'
-import {PersonDetails, PersonList} from '../sw-components'
+import React from 'react'
+import {withRouter} from 'react-router-dom'
+import {PersonList} from '../sw-components'
 import ErrorBoundry from '../error-boundry'
 
-const PersonPage = () => {
-	const [selectedItem, setSelectedItem] = useState(null)
-	const onItemSelected = (id) => setSelectedItem(id)
-
-
+const PersonPage = ({history}) => {
 	return (
-		<Row>
-			<ErrorBoundry>
-				<PersonList onItemSelected={onItemSelected}/>
-			</ErrorBoundry>
-			<ErrorBoundry>
-				<PersonDetails itemId={selectedItem}>
-					<Record field='gender' label='Gender :'/>
-					<Record field='birthYear' label='Birth Year :'/>
-					<Record field='eyeColor' label='Eye Color :'/>
-				</PersonDetails>
-			</ErrorBoundry>
-		</Row>
+		<ErrorBoundry>
+			<PersonList
+				onItemSelected={(id)=>history.push(id)}/>
+		</ErrorBoundry>
 	)
 }
 
-export default PersonPage
+
+export default withRouter(PersonPage)
